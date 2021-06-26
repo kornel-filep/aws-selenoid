@@ -201,3 +201,4 @@ $RECYCLE.BIN/
 
 *.pem
 .husky
+.vscode
