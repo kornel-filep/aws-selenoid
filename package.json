@@ -24,6 +24,6 @@
         "uuid": "^8.3.2"
     },
     "lint-staged": {
-        "**/*": "prettier --write --ignore-unknown"
+        "**/*": "prettier --write --ignore-unknown ."
     }
 }
