@@ -1,11 +1,10 @@
 import dotenv from 'dotenv'
 import AWS from 'aws-sdk'
-import { SelenoidInstallSteps } from './selenoid/SelenoidInstallSteps'
-
 dotenv.config()
 AWS.config.update({ region: 'eu-north-1' })
+import { SelenoidInstallSteps } from './selenoid/SelenoidInstallSteps'
+import { EC2Wrapper } from './aws/EC2Wrapper'
 
-const EC2 = new AWS.EC2()
 const selenoidInstallSteps = new SelenoidInstallSteps()
 
 AWS.config.getCredentials((err) => {
@@ -30,12 +29,7 @@ const params = {
 } as AWS.EC2.RunInstancesRequest
 
 ;(async () => {
-    const instances = await EC2.runInstances(params).promise()
-    const createdInstance = await EC2.waitFor('instanceStatusOk', {
-        InstanceIds: [instances.Instances![0].InstanceId!],
-    }).promise()
-    const describedInstance = await EC2.describeInstances({
-        InstanceIds: [createdInstance!.InstanceStatuses![0].InstanceId!],
-    }).promise()
-    console.log(describedInstance.Reservations![0].Instances![0].PublicIpAddress)
+    const ec2 = new EC2Wrapper()
+    const createdInstance = await ec2.createInstances(params)
+    console.log(await ec2.getIpOfInstance(createdInstance.Instances![0].InstanceId!))
 })()
