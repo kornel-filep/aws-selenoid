@@ -1,7 +1,7 @@
 # AWS-Selenoid
 
-This is a small demo project to showcase how to use Selenoid with AWS EC2 instances.
-Selenoid can be used to provide and manage containerized browsers. It puts each browser into its own container, which can be provisioned on-demand.
+This is a small demo project to showcase how to use Selenoid with AWS EC2 instances.  
+Selenoid can be used to provide and manage containerized browsers. It puts each browser into its own container, which can be provisioned on-demand.  
 This demo combines selenoid with AWS EC2 instances, to show a solution a common problem of testing across different browsers.
 
 Selenoid: https://github.com/aerokube/selenoid
