@@ -23,4 +23,8 @@ export class EC2Wrapper {
         await this.waitForInstance('instanceStatusOk', instanceId)
         return (await this.getDescribedInstance(instanceId)).Reservations![0].Instances![0].PublicIpAddress
     }
+
+    public async terminateInstance(instanceId: string) {
+        await this.EC2.terminateInstances({ InstanceIds: [instanceId] }).promise()
+    }
 }
